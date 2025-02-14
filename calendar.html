@@ -7,18 +7,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
             padding: 10px;
             text-align: center;
+            transition: background 0.5s ease-in-out;
         }
         .container {
-            max-width: 100%;
-            margin: auto;
+            width: 90%;
+            max-width: 400px;
             background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
         .calendar {
             display: grid;
@@ -27,17 +27,12 @@
             margin-top: 10px;
         }
         .day {
-            width: 100%;
             padding: 10px;
             background: #fff;
             border-radius: 5px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
             font-size: 14px;
-            cursor: pointer;
-        }
-        .day:hover {
-            background-color: #d4edda;
         }
         .emoji {
             font-size: 18px;
@@ -48,6 +43,12 @@
             font-size: 16px;
             font-style: italic;
             color: #555;
+        }
+        .panic-report {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d9534f;
         }
         @media (max-width: 600px) {
             .calendar {
@@ -65,14 +66,21 @@
 <div class="container">
     <h2>Monthly Mood & Symptom Report</h2>
     <div class="calendar" id="calendar"></div>
-    <p class="quote">"Your mental health is just as important as your physical health. Take care of yourself!"</p>
+    <p class="panic-report" id="panicReport"></p>
+    <p class="quote">"Your mental health is important. Take one step at a time."</p>
 </div>
 
 <script>
+    function applyTheme() {
+        let themeColor = localStorage.getItem('themeColor') || '#f4f4f9';
+        document.body.style.background = themeColor;
+    }
+
     function generateCalendar() {
         let calendar = document.getElementById('calendar');
         let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
         let daysInMonth = new Date().getDate();
+        let panicCount = 0;
 
         for (let i = 1; i <= daysInMonth; i++) {
             let dayDiv = document.createElement('div');
@@ -84,12 +92,20 @@
                 emojiSpan.className = 'emoji';
                 emojiSpan.textContent = logs[i].emoji;
                 dayDiv.appendChild(emojiSpan);
+
+                if (logs[i].panic === "Yes") {
+                    panicCount++;
+                }
             }
 
             calendar.appendChild(dayDiv);
         }
+
+        document.getElementById('panicReport').textContent = 
+            `You have experienced panic attacks ${panicCount} times this month.`;
     }
 
+    applyTheme();
     generateCalendar();
 </script>
 
