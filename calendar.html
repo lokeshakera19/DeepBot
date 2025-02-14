@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .calendar-container {
+            max-width: 90%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .calendar div {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+            min-height: 50px;
+            position: relative;
+        }
+        .calendar div:hover {
+            background-color: #ddd;
+        }
+        .day-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .details {
+            display: none;
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .quote {
+            margin-top: 20px;
+            font-size: 18px;
+            font-style: italic;
+            color: #555;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-container">
+    <h2>Monthly Mood Tracker</h2>
+    <div id="calendar" class="calendar"></div>
+
+    <p class="quote">"Your mental health is a priority. Your happiness is essential. Your self-care is a necessity." 💙</p>
+
+    <button onclick="window.location.href='deepcheck.html'">Back to Daily Tracker</button>
+</div>
+
+<script>
+    function loadCalendar() {
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+        let calendar = document.getElementById('calendar');
+        calendar.innerHTML = "";
+
+        let daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+        for (let i = 1; i <= daysInMonth; i++) {
+            let dayDiv = document.createElement('div');
+            let log = logs[i] || {};
+            let emoji = log.emoji || "💬";
+            let detailsText = log.symptoms ? `Mood: ${log.mood}, Symptoms: ${log.symptoms}` : "No data";
+
+            dayDiv.classList.add('day-container');
+            dayDiv.innerHTML = `<span>${i}</span><div>${emoji}</div><div class="details">${detailsText}</div>`;
+            dayDiv.onclick = () => {
+                let details = dayDiv.querySelector('.details');
+                details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            };
+            calendar.appendChild(dayDiv);
+        }
+    }
+
+    loadCalendar();
+</script>
+
+</body>
+</html>
