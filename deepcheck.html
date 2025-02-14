@@ -3,146 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Health Tracker</title>
+    <title>Mental Health Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
+            transition: background 0.5s ease-in-out;
         }
         .container {
-            max-width: 90%;
-            margin: auto;
+            width: 90%;
+            max-width: 400px;
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .question-section {
-            text-align: left;
+        .question {
+            margin-top: 15px;
+            font-size: 16px;
         }
-        .emoji-section {
-            display: flex;
-            justify-content: space-evenly;
+        .emoji-container {
             margin: 10px 0;
         }
         .emoji {
             font-size: 24px;
+            padding: 8px;
             cursor: pointer;
-            transition: transform 0.2s;
         }
-        .emoji:hover {
-            transform: scale(1.2);
-        }
-        button {
-            background-color: #4CAF50;
+        .button {
+            background: #007BFF;
             color: white;
             border: none;
-            padding: 12px;
-            cursor: pointer;
-            width: 100%;
+            padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
+            cursor: pointer;
             margin-top: 10px;
         }
-        button:hover {
-            background-color: #45a049;
-        }
-        .selected {
-            border: 2px solid #4CAF50;
-            padding: 5px;
-            border-radius: 50%;
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h3>Daily Mental Health Check-In</h3>
-    <form id="quizForm">
-        <p>1. How was your mood today?</p>
-        <label><input type="radio" name="mood" value="Happy"> Happy 😊</label><br>
-        <label><input type="radio" name="mood" value="Neutral"> Neutral 😐</label><br>
-        <label><input type="radio" name="mood" value="Sad"> Sad ☹️</label><br><br>
+    <h2>Daily Mental Health Check-In</h2>
 
-        <p>2. How well did you sleep last night?</p>
-        <label><input type="radio" name="sleep" value="Great"> Great 😴</label><br>
-        <label><input type="radio" name="sleep" value="Okay"> Okay 😌</label><br>
-        <label><input type="radio" name="sleep" value="Poor"> Poor 😵</label><br><br>
+    <div class="question">How are you feeling today?</div>
+    <div class="emoji-container">
+        <span class="emoji" onclick="selectMood('😊', '#f3f39d')">😊</span>
+        <span class="emoji" onclick="selectMood('😐', '#c1c1c1')">😐</span>
+        <span class="emoji" onclick="selectMood('😢', '#8fc7f1')">😢</span>
+        <span class="emoji" onclick="selectMood('😠', '#ff6961')">😠</span>
+        <span class="emoji" onclick="selectMood('😰', '#7760e3')">😰</span>
+    </div>
 
-        <p>3. Did you experience any of these today?</p>
-        <label><input type="checkbox" name="symptoms" value="Depression"> Depression</label><br>
-        <label><input type="checkbox" name="symptoms" value="Anxiety"> Anxiety</label><br>
-        <label><input type="checkbox" name="symptoms" value="Panic Attack"> Panic Attack</label><br><br>
+    <div class="question">Did you experience anxiety today?</div>
+    <button class="button" onclick="logResponse('anxiety', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('anxiety', 'No')">No</button>
 
-        <p>4. How stressful was your day?</p>
-        <label><input type="radio" name="stress" value="Low"> Low 😌</label><br>
-        <label><input type="radio" name="stress" value="Moderate"> Moderate 😟</label><br>
-        <label><input type="radio" name="stress" value="High"> High 😨</label><br><br>
+    <div class="question">Did you have a panic attack?</div>
+    <button class="button" onclick="logResponse('panic', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('panic', 'No')">No</button>
 
-        <p>5. Did you talk to someone today?</p>
-        <label><input type="radio" name="social" value="Yes"> Yes 🗣️</label><br>
-        <label><input type="radio" name="social" value="No"> No 🤐</label><br><br>
+    <div class="question">Did you feel overwhelmed or stressed?</div>
+    <button class="button" onclick="logResponse('stress', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('stress', 'No')">No</button>
 
-        <p>6. How productive was your day?</p>
-        <label><input type="radio" name="productivity" value="Very"> Very 🚀</label><br>
-        <label><input type="radio" name="productivity" value="Somewhat"> Somewhat ⚡</label><br>
-        <label><input type="radio" name="productivity" value="Not much"> Not much 😓</label><br><br>
+    <div class="question">Did you get enough sleep last night?</div>
+    <button class="button" onclick="logResponse('sleep', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('sleep', 'No')">No</button>
 
-        <p>7. Choose an emoji to describe your day:</p>
-        <div class="emoji-section">
-            <span class="emoji" onclick="selectEmoji(this, '😊')">😊</span>
-            <span class="emoji" onclick="selectEmoji(this, '😐')">😐</span>
-            <span class="emoji" onclick="selectEmoji(this, '☹️')">☹️</span>
-            <span class="emoji" onclick="selectEmoji(this, '😢')">😢</span>
-        </div>
-        <input type="hidden" id="selectedEmoji">
-        <br>
+    <div class="question">Did you talk to a friend or family member today?</div>
+    <button class="button" onclick="logResponse('social', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('social', 'No')">No</button>
 
-        <button type="submit">Submit</button>
-    </form>
-
-    <button onclick="window.location.href='calendar.html'">Show Monthly Report</button>
+    <div class="question">Did you engage in any physical activity?</div>
+    <button class="button" onclick="logResponse('exercise', 'Yes')">Yes</button>
+    <button class="button" onclick="logResponse('exercise', 'No')">No</button>
+    <div class="question1"></div>
+    <button class="button" onclick="window.location.href='calendar.html'">Show Monthly Report</button>
 </div>
 
 <script>
-    function selectEmoji(element, emoji) {
-        document.getElementById('selectedEmoji').value = emoji;
-        document.querySelectorAll('.emoji').forEach(e => e.classList.remove('selected'));
-        element.classList.add('selected');
+    function selectMood(emoji, color) {
+        document.body.style.background = color;
+        localStorage.setItem('themeColor', color);
+        localStorage.setItem('moodEmoji', emoji);
     }
 
-    document.getElementById('quizForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        let date = new Date().getDate();
-        let symptoms = Array.from(document.querySelectorAll("input[name='symptoms']:checked")).map(e => e.value).join(", ") || "None";
-        let mood = document.querySelector("input[name='mood']:checked")?.value || "Not answered";
-        let sleep = document.querySelector("input[name='sleep']:checked")?.value || "Not answered";
-        let stress = document.querySelector("input[name='stress']:checked")?.value || "Not answered";
-        let social = document.querySelector("input[name='social']:checked")?.value || "Not answered";
-        let productivity = document.querySelector("input[name='productivity']:checked")?.value || "Not answered";
-        let emoji = document.getElementById('selectedEmoji').value || "❓";
-
-        let entry = {
-            date: date,
-            mood: mood,
-            sleep: sleep,
-            symptoms: symptoms,
-            stress: stress,
-            social: social,
-            productivity: productivity,
-            emoji: emoji
-        };
-
+    function logResponse(type, value) {
+        let today = new Date().getDate();
         let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
-        logs[date] = entry;
+        if (!logs[today]) {
+            logs[today] = {};
+        }
+        logs[today][type] = value;
+        logs[today].emoji = localStorage.getItem('moodEmoji') || '😐';
         localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
+    }
 
-        window.location.reload();
-    });
+    document.body.style.background = localStorage.getItem('themeColor') || '#f4f4f9';
 </script>
 
 </body>
