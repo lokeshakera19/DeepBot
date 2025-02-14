@@ -9,35 +9,27 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
-            padding: 0;
-            color: #333;
+            padding: 20px;
             text-align: center;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-        }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 90%;
+            margin: auto;
             background: white;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         .question-section {
-            margin-bottom: 20px;
             text-align: left;
         }
         .emoji-section {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            justify-content: space-evenly;
+            margin: 10px 0;
         }
         .emoji {
-            font-size: 30px;
+            font-size: 24px;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -48,104 +40,100 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
             border-radius: 5px;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
         }
-        .calendar-section {
-            display: none;
-            margin-top: 20px;
-        }
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            text-align: center;
-        }
-        .calendar div {
-            border: 1px solid #ccc;
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .calendar div:hover {
-            background-color: #ddd;
-        }
-        .day-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .selected {
+            border: 2px solid #4CAF50;
+            padding: 5px;
+            border-radius: 50%;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Mental Health Tracker</h1>
-    <p>Track your well-being daily</p>
-</header>
-
 <div class="container">
-    <div class="question-section">
-        <h3>Daily Mental Health Quiz</h3>
-        <form id="quizForm">
-            <p>1. How often did you feel overwhelmed today?</p>
-            <label><input type="radio" name="overwhelm" value="Never"> Never</label><br>
-            <label><input type="radio" name="overwhelm" value="Sometimes"> Sometimes</label><br>
-            <label><input type="radio" name="overwhelm" value="Often"> Often</label><br><br>
+    <h3>Daily Mental Health Check-In</h3>
+    <form id="quizForm">
+        <p>1. How was your mood today?</p>
+        <label><input type="radio" name="mood" value="Happy"> Happy 😊</label><br>
+        <label><input type="radio" name="mood" value="Neutral"> Neutral 😐</label><br>
+        <label><input type="radio" name="mood" value="Sad"> Sad ☹️</label><br><br>
 
-            <p>2. Did you experience any of the following today?</p>
-            <label><input type="checkbox" name="symptoms" value="Depression"> Depression</label><br>
-            <label><input type="checkbox" name="symptoms" value="Anxiety"> Anxiety</label><br>
-            <label><input type="checkbox" name="symptoms" value="Panic Attack"> Panic Attack</label><br><br>
+        <p>2. How well did you sleep last night?</p>
+        <label><input type="radio" name="sleep" value="Great"> Great 😴</label><br>
+        <label><input type="radio" name="sleep" value="Okay"> Okay 😌</label><br>
+        <label><input type="radio" name="sleep" value="Poor"> Poor 😵</label><br><br>
 
-            <p>3. How was your sleep last night?</p>
-            <label><input type="radio" name="sleep" value="Good"> Good</label><br>
-            <label><input type="radio" name="sleep" value="Average"> Average</label><br>
-            <label><input type="radio" name="sleep" value="Poor"> Poor</label><br><br>
+        <p>3. Did you experience any of these today?</p>
+        <label><input type="checkbox" name="symptoms" value="Depression"> Depression</label><br>
+        <label><input type="checkbox" name="symptoms" value="Anxiety"> Anxiety</label><br>
+        <label><input type="checkbox" name="symptoms" value="Panic Attack"> Panic Attack</label><br><br>
 
-            <p>4. Choose an emoji for your mood today:</p>
-            <div class="emoji-section">
-                <span class="emoji" onclick="selectEmoji('😊')">😊</span>
-                <span class="emoji" onclick="selectEmoji('😐')">😐</span>
-                <span class="emoji" onclick="selectEmoji('☹️')">☹️</span>
-                <span class="emoji" onclick="selectEmoji('😢')">😢</span>
-            </div>
-            <input type="hidden" id="selectedEmoji">
-            <br>
+        <p>4. How stressful was your day?</p>
+        <label><input type="radio" name="stress" value="Low"> Low 😌</label><br>
+        <label><input type="radio" name="stress" value="Moderate"> Moderate 😟</label><br>
+        <label><input type="radio" name="stress" value="High"> High 😨</label><br><br>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+        <p>5. Did you talk to someone today?</p>
+        <label><input type="radio" name="social" value="Yes"> Yes 🗣️</label><br>
+        <label><input type="radio" name="social" value="No"> No 🤐</label><br><br>
 
-    <button onclick="showMonthlyReport()">Show Monthly Report</button>
+        <p>6. How productive was your day?</p>
+        <label><input type="radio" name="productivity" value="Very"> Very 🚀</label><br>
+        <label><input type="radio" name="productivity" value="Somewhat"> Somewhat ⚡</label><br>
+        <label><input type="radio" name="productivity" value="Not much"> Not much 😓</label><br><br>
 
-    <div class="calendar-section" id="calendarSection">
-        <h3>Monthly Report</h3>
-        <div id="calendar" class="calendar"></div>
-    </div>
+        <p>7. Choose an emoji to describe your day:</p>
+        <div class="emoji-section">
+            <span class="emoji" onclick="selectEmoji(this, '😊')">😊</span>
+            <span class="emoji" onclick="selectEmoji(this, '😐')">😐</span>
+            <span class="emoji" onclick="selectEmoji(this, '☹️')">☹️</span>
+            <span class="emoji" onclick="selectEmoji(this, '😢')">😢</span>
+        </div>
+        <input type="hidden" id="selectedEmoji">
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <button onclick="window.location.href='calendar.html'">Show Monthly Report</button>
 </div>
 
 <script>
+    function selectEmoji(element, emoji) {
+        document.getElementById('selectedEmoji').value = emoji;
+        document.querySelectorAll('.emoji').forEach(e => e.classList.remove('selected'));
+        element.classList.add('selected');
+    }
+
     document.getElementById('quizForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
         let date = new Date().getDate();
         let symptoms = Array.from(document.querySelectorAll("input[name='symptoms']:checked")).map(e => e.value).join(", ") || "None";
-        let overwhelm = document.querySelector("input[name='overwhelm']:checked")?.value || "Not answered";
+        let mood = document.querySelector("input[name='mood']:checked")?.value || "Not answered";
         let sleep = document.querySelector("input[name='sleep']:checked")?.value || "Not answered";
+        let stress = document.querySelector("input[name='stress']:checked")?.value || "Not answered";
+        let social = document.querySelector("input[name='social']:checked")?.value || "Not answered";
+        let productivity = document.querySelector("input[name='productivity']:checked")?.value || "Not answered";
         let emoji = document.getElementById('selectedEmoji').value || "❓";
 
         let entry = {
             date: date,
-            symptoms: symptoms,
-            overwhelm: overwhelm,
+            mood: mood,
             sleep: sleep,
+            symptoms: symptoms,
+            stress: stress,
+            social: social,
+            productivity: productivity,
             emoji: emoji
         };
 
@@ -153,34 +141,8 @@
         logs[date] = entry;
         localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
 
-        alert("Your response has been saved!");
+        window.location.reload();
     });
-
-    function selectEmoji(emoji) {
-        document.getElementById('selectedEmoji').value = emoji;
-        alert(`You selected: ${emoji}`);
-    }
-
-    function showMonthlyReport() {
-        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
-        let calendar = document.getElementById('calendar');
-        calendar.innerHTML = "";
-
-        let daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
-        for (let i = 1; i <= daysInMonth; i++) {
-            let dayDiv = document.createElement('div');
-            let log = logs[i] || {};
-            let emoji = log.emoji || "💬";
-            let details = log.symptoms ? `Symptoms: ${log.symptoms}, Sleep: ${log.sleep}` : "No data";
-
-            dayDiv.classList.add('day-container');
-            dayDiv.innerHTML = `<span>${i}</span><div>${emoji}</div>`;
-            dayDiv.onclick = () => alert(`Day ${i}:\n${details}`);
-            calendar.appendChild(dayDiv);
-        }
-
-        document.getElementById('calendarSection').style.display = "block";
-    }
 </script>
 
 </body>
