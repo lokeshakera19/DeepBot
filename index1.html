@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress-Free Products</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const products = [
+                { name: "Relaxing Essential Oil", price: "₹349", image: "image/essential oil.jpg", link: "https://amzn.in/d/2qfQqk1" },
+                { name: "Stress Relief Tea", price: "₹200", image: "image/Camomile-green-teas.jpg", link: "https://www.flipkart.com" },
+                { name: "Aromatherapy Candle", price: "₹799", image: "image/chamamile soy candle.webp", link: "https://www.myntra.com" },
+                { name: "Massage Roller", price: "₹1500", image: "image/Massage Roller.webp", link: "https://www.decathlon.in" },
+                { name: "Weighted Blanket", price: "₹3,799", image: "image/Weighted blanket.webp", link: "https://amzn.in/d/iLw6pL4" },
+                { name: "Yoga Mat", price: "₹369", image: "image/yoga mat.webp", link: "https://www.flipkart.com" },
+                { name: "Electric Eye Massager", price: "₹4,799", image: "image/Electric Eye Massager.webp", link: "https://amzn.in/d/4Ufvffy" },
+                { name: "Essential Oil Diffuser", price: "₹1195", image: "image/Essential Oil Diffuser.webp", link: "https://www.myntra.com" },
+                { name: "Sleep Mask", price: "₹222", image: "image/Sleep Mask.jpeg", link: "https://www.flipkart.com" },
+                { name: "Stress Ball", price: "₹474", image: "image/Stress ball.jpg", link: "https://amzn.in/d/ctzV5PM" }
+            ];
+
+            const productContainer = document.getElementById("products");
+
+            products.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product");
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" onclick="window.open('${product.link}', '_blank')">
+                    <p class="product-name">${product.name}</p>
+                    <p class="product-price">${product.price}</p>
+                `;
+                productContainer.appendChild(productDiv);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Stress-Free Products</h1>
+    <div class="product-container" id="products"></div>
+</body>
+</html>
