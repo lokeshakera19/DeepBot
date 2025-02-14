@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Analyzer</title>
+    <style>
+        /* General Styles */
+        body {
+            background: linear-gradient(to bottom, #6A0DAD, #FFFFFF);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Mobile App Look */
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Headings */
+        h2 {
+            color: #6A0DAD;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            background: #6A0DAD;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Result Box */
+        .result-box {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+            background: rgba(106, 13, 173, 0.1);
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Health Analyzer</h2>
+        <p>Enter your details to get personalized health recommendations.</p>
+
+        <div class="form-group">
+            <label for="sleep">Sleep Duration (hours):</label>
+            <input type="number" id="sleep" min="0" max="24" placeholder="Enter hours">
+        </div>
+
+        <div class="form-group">
+            <label for="heartRate">Heart Rate (bpm):</label>
+            <input type="number" id="heartRate" min="30" max="200" placeholder="Enter heart rate">
+        </div>
+
+        <div class="form-group">
+            <label for="stress">Stress Level:</label>
+            <select id="stress">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+        <button onclick="analyzeHealth()">Analyze</button>
+
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <script>
+        function analyzeHealth() {
+            let sleep = document.getElementById("sleep").value;
+            let heartRate = document.getElementById("heartRate").value;
+            let stress = document.getElementById("stress").value;
+            let resultBox = document.getElementById("result");
+
+            let recommendations = [];
+
+            // Sleep Analysis
+            if (sleep < 6) {
+                recommendations.push("⚠️ You need more sleep! Aim for at least 7-8 hours.");
+            } else {
+                recommendations.push("✅ Your sleep duration is good!");
+            }
+
+            // Heart Rate Analysis
+            if (heartRate < 60) {
+                recommendations.push("⚠️ Your heart rate is low. Consult a doctor if you feel weak.");
+            } else if (heartRate > 100) {
+                recommendations.push("⚠️ Your heart rate is high. Consider relaxation techniques.");
+            } else {
+                recommendations.push("✅ Your heart rate is in a healthy range.");
+            }
+
+            // Stress Analysis
+            if (stress === "high") {
+                recommendations.push("⚠️ Reduce stress! Try meditation, exercise, or deep breathing.");
+            } else {
+                recommendations.push("✅ Your stress level is manageable. Keep it up!");
+            }
+
+            // Display Results
+            resultBox.innerHTML = recommendations.join("<br>");
+            resultBox.style.display = "block";
+        }
+    </script>
+</body>
+</html>
