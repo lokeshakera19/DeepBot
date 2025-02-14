@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question-section {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .emoji-section {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .emoji {
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .emoji:hover {
+            transform: scale(1.2);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .calendar-section {
+            display: none;
+            margin-top: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+        .calendar div {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calendar div:hover {
+            background-color: #ddd;
+        }
+        .day-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Mental Health Tracker</h1>
+    <p>Track your well-being daily</p>
+</header>
+
+<div class="container">
+    <div class="question-section">
+        <h3>Daily Mental Health Quiz</h3>
+        <form id="quizForm">
+            <p>1. How often did you feel overwhelmed today?</p>
+            <label><input type="radio" name="overwhelm" value="Never"> Never</label><br>
+            <label><input type="radio" name="overwhelm" value="Sometimes"> Sometimes</label><br>
+            <label><input type="radio" name="overwhelm" value="Often"> Often</label><br><br>
+
+            <p>2. Did you experience any of the following today?</p>
+            <label><input type="checkbox" name="symptoms" value="Depression"> Depression</label><br>
+            <label><input type="checkbox" name="symptoms" value="Anxiety"> Anxiety</label><br>
+            <label><input type="checkbox" name="symptoms" value="Panic Attack"> Panic Attack</label><br><br>
+
+            <p>3. How was your sleep last night?</p>
+            <label><input type="radio" name="sleep" value="Good"> Good</label><br>
+            <label><input type="radio" name="sleep" value="Average"> Average</label><br>
+            <label><input type="radio" name="sleep" value="Poor"> Poor</label><br><br>
+
+            <p>4. Choose an emoji for your mood today:</p>
+            <div class="emoji-section">
+                <span class="emoji" onclick="selectEmoji('😊')">😊</span>
+                <span class="emoji" onclick="selectEmoji('😐')">😐</span>
+                <span class="emoji" onclick="selectEmoji('☹️')">☹️</span>
+                <span class="emoji" onclick="selectEmoji('😢')">😢</span>
+            </div>
+            <input type="hidden" id="selectedEmoji">
+            <br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <button onclick="showMonthlyReport()">Show Monthly Report</button>
+
+    <div class="calendar-section" id="calendarSection">
+        <h3>Monthly Report</h3>
+        <div id="calendar" class="calendar"></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let date = new Date().getDate();
+        let symptoms = Array.from(document.querySelectorAll("input[name='symptoms']:checked")).map(e => e.value).join(", ") || "None";
+        let overwhelm = document.querySelector("input[name='overwhelm']:checked")?.value || "Not answered";
+        let sleep = document.querySelector("input[name='sleep']:checked")?.value || "Not answered";
+        let emoji = document.getElementById('selectedEmoji').value || "❓";
+
+        let entry = {
+            date: date,
+            symptoms: symptoms,
+            overwhelm: overwhelm,
+            sleep: sleep,
+            emoji: emoji
+        };
+
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+        logs[date] = entry;
+        localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
+
+        alert("Your response has been saved!");
+    });
+
+    function selectEmoji(emoji) {
+        document.getElementById('selectedEmoji').value = emoji;
+        alert(`You selected: ${emoji}`);
+    }
+
+    function showMonthlyReport() {
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+        let calendar = document.getElementById('calendar');
+        calendar.innerHTML = "";
+
+        let daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+        for (let i = 1; i <= daysInMonth; i++) {
+            let dayDiv = document.createElement('div');
+            let log = logs[i] || {};
+            let emoji = log.emoji || "💬";
+            let details = log.symptoms ? `Symptoms: ${log.symptoms}, Sleep: ${log.sleep}` : "No data";
+
+            dayDiv.classList.add('day-container');
+            dayDiv.innerHTML = `<span>${i}</span><div>${emoji}</div>`;
+            dayDiv.onclick = () => alert(`Day ${i}:\n${details}`);
+            calendar.appendChild(dayDiv);
+        }
+
+        document.getElementById('calendarSection').style.display = "block";
+    }
+</script>
+
+</body>
+</html>
