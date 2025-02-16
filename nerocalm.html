@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <h1>NeuroCalm AI</h1>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <!-- Header Section -->
+        <div class="chat-header">
+            <h2>NeuroCalm</h2>
+            <button id="theme-toggle">🌙</button>
+            <div class="chat-options">
+                <select id="languageSelect">
+                    <option value="English">🌐 English</option>
+                    <option value="Telugu">🇮🇳 తెలుగు (Telugu)</option>
+                    <option value="Hindi">🇮🇳 हिंदी (Hindi)</option>
+                    <option value="Malayalam">🇮🇳 മലയാളം (Malayalam)</option>
+                    <option value="Tamil">தமிழ் (Tamil)</option>
+                    <option value="Gujarati">ગુજરાતી (Gujarati)</option>
+                    <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+                    <option value="Malayalam">മലയാളം (Malayalam)</option>
+                    <option value="Punjabi">ਪੰਜਾਬੀ (Punjabi)</option>
+                    <option value="Urdu">اردو (Urdu)</option>
+                </select>
+               
+            </div>
+        </div>
+
+        <!-- Chat Display -->
+        <div class="chat-box" id="chatBox"></div>
+
+        <!-- Input Field -->
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." autocomplete="off">
+            <button id="sendBtn">➤</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
