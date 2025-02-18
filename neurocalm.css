@@ -26,7 +26,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     transition: background 0.4s ease;
-    overflow-x: hidden;
+    overflow: hidden; /* Prevents body overflow on smaller screens */
 }
 
 /* Splash Screen */
@@ -43,7 +43,7 @@ body {
     align-items: center;
     text-align: center;
     color: white;
-    font-size: 5vw; /* Responsive font size */
+    font-size: 20px;
     font-weight: bold;
     animation: fadeOut 3s ease-in-out forwards;
 }
@@ -72,12 +72,11 @@ body {
     background: linear-gradient(45deg, var(--bot-msg-bg), var(--user-msg-bg));
     padding: 15px;
     text-align: center;
-    font-size: 3vw; /* Responsive font size */
+    font-size: 18px;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
 }
 
 #theme-toggle {
@@ -97,8 +96,7 @@ body {
     flex-direction: column;
     gap: 10px;
     scrollbar-width: none;
-    margin-bottom: 60px; /* Space for the fixed input field */
-    box-sizing: border-box;
+    margin-bottom: 70px; /* Space for the fixed input field */
 }
 
 .chat-box::-webkit-scrollbar {
@@ -143,7 +141,6 @@ body {
     padding: 10px;
     background: var(--chat-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-sizing: border-box;
 }
 
 .chat-input input {
@@ -178,7 +175,6 @@ body {
     gap: 10px;
     scrollbar-width: none;
     margin-bottom: 60px; /* Space for the fixed input field */
-    box-sizing: border-box;
 }
 
 /* Animations */
@@ -197,79 +193,64 @@ body {
     100% { width: 100%; }
 }
 
-/* Media Queries for Mobile Responsiveness */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
     body {
-        font-size: 14px; /* Adjust font size for mobile */
-    }
-
-    .splash-screen {
-        font-size: 8vw; /* Larger font size for mobile */
+        font-size: 14px;
     }
 
     .chat-header {
-        font-size: 4vw; /* Adjust header font size for mobile */
+        padding: 10px;
+        font-size: 16px;
     }
 
     .chat-box {
-        padding: 10px; /* Less padding on mobile */
+        padding: 10px;
     }
 
-    .chat-input {
-        padding: 8px; /* Adjust input padding */
+    .bot-message, .user-message {
+        max-width: 80%;
+        padding: 8px;
+        font-size: 14px;
     }
 
     .chat-input input {
-        font-size: 14px; /* Smaller input font */
+        font-size: 14px;
     }
 
     .chat-input button {
-        font-size: 14px; /* Adjust button font */
-    }
-
-    /* Stack chat messages vertically for smaller screens */
-    .bot-message, .user-message {
-        max-width: 100%; /* Make messages fill screen */
-        margin-bottom: 10px;
-    }
-
-    .chat-header {
-        font-size: 5vw; /* Font size for small devices */
+        font-size: 14px;
+        padding: 10px;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        font-size: 12px; /* Smaller font size for very small screens */
-    }
-
-    .splash-screen {
-        font-size: 10vw; /* Adjust splash font size */
+        font-size: 12px;
     }
 
     .chat-header {
-        font-size: 6vw; /* Header font for very small screens */
+        padding: 8px;
+        font-size: 14px;
     }
 
     .chat-box {
-        padding: 5px; /* Adjust padding for mobile screens */
+        padding: 8px;
     }
 
-    .chat-input {
-        padding: 5px;
+    .bot-message, .user-message {
+        max-width: 90%;
+        padding: 6px;
+        font-size: 12px;
     }
 
     .chat-input input {
-        font-size: 12px; /* Adjust font size */
+        font-size: 12px;
+        padding: 10px;
     }
 
     .chat-input button {
         font-size: 12px;
-    }
-
-    /* Full width for messages */
-    .bot-message, .user-message {
-        max-width: 100%;
-        margin-bottom: 8px;
+        padding: 10px;
     }
 }
