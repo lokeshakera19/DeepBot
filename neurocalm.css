@@ -173,7 +173,15 @@ body {
     0% { width: 0%; }
     100% { width: 100%; }
 }
-
+@media (max-width: 768px) {
+    body {
+        width: 100%; /* Use full width on smaller screens */
+    }
+    
+    .container {
+        width: 90%;  /* Use 90% of screen width on mobile */
+    }
+}
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     body {
