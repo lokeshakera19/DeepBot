@@ -24,12 +24,10 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: background 0.4s ease;
-    overflow: hidden; /* Prevents body overflow on smaller screens */
+    justify-content: flex-start;
+    overflow: hidden;
 }
 
-/* Splash Screen */
 .splash-screen {
     position: fixed;
     width: 100%;
@@ -53,7 +51,6 @@ body {
     height: 5px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
-    overflow: hidden;
     margin-top: 15px;
 }
 
@@ -70,9 +67,9 @@ body {
 .chat-header {
     width: 100%;
     background: linear-gradient(45deg, var(--bot-msg-bg), var(--user-msg-bg));
-    padding: 15px;
+    padding: 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
@@ -82,7 +79,7 @@ body {
 #theme-toggle {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     color: white;
 }
@@ -91,22 +88,17 @@ body {
 .chat-box {
     flex: 1;
     overflow-y: auto;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    scrollbar-width: none;
-    margin-bottom: 70px; /* Space for the fixed input field */
-}
-
-.chat-box::-webkit-scrollbar {
-    display: none;
+    gap: 8px;
+    margin-bottom: 60px;
 }
 
 /* Chat Messages */
 .bot-message, .user-message {
-    max-width: 75%;
-    padding: 10px;
+    max-width: 70%;
+    padding: 8px;
     border-radius: 10px;
     line-height: 1.4;
     animation: popUp 0.3s ease-in-out;
@@ -138,15 +130,15 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 8px 10px;
     background: var(--chat-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .chat-input input {
     flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 14px;
     border: none;
     outline: none;
     border-radius: 8px;
@@ -158,23 +150,11 @@ body {
     background: var(--user-msg-bg);
     border: none;
     color: white;
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 14px;
     margin-left: 10px;
     border-radius: 8px;
     cursor: pointer;
-}
-
-/* Ensure chat messages take up available space */
-.chat-box {
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    scrollbar-width: none;
-    margin-bottom: 60px; /* Space for the fixed input field */
 }
 
 /* Animations */
@@ -205,22 +185,23 @@ body {
     }
 
     .chat-box {
-        padding: 10px;
+        padding: 8px;
     }
 
     .bot-message, .user-message {
         max-width: 80%;
-        padding: 8px;
+        padding: 6px;
         font-size: 14px;
     }
 
     .chat-input input {
         font-size: 14px;
+        padding: 8px;
     }
 
     .chat-input button {
         font-size: 14px;
-        padding: 10px;
+        padding: 8px;
     }
 }
 
@@ -235,22 +216,22 @@ body {
     }
 
     .chat-box {
-        padding: 8px;
+        padding: 6px;
     }
 
     .bot-message, .user-message {
         max-width: 90%;
-        padding: 6px;
+        padding: 5px;
         font-size: 12px;
     }
 
     .chat-input input {
         font-size: 12px;
-        padding: 10px;
+        padding: 8px;
     }
 
     .chat-input button {
         font-size: 12px;
-        padding: 10px;
+        padding: 8px;
     }
 }
