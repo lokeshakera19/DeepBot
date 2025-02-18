@@ -93,7 +93,7 @@ body {
     flex-direction: column;
     gap: 6px;
     margin-bottom: 50px;
-    max-height: 80vh; /* Limit the height within the app */
+    max-height: 60vh; /* Limit the height within the app */
 }
 
 /* Chat Messages */
