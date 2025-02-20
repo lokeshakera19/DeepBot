@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with Therapist</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2, h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        select, button {
+            width: 90%;
+            max-width: 400px;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        select {
+            background: white;
+            color: #333;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        #status {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #video-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Connect with an Online Therapist</h2>
+
+    <h3>What mental health issue are you facing?</h3>
+    <select id="mentalIssue">
+        <option value="stress">Stress</option>
+        <option value="anxiety">Anxiety</option>
+        <option value="depression">Depression</option>
+        <option value="insomnia">Insomnia</option>
+    </select>
+    <button id="findDoctor">Find Therapist</button>
+
+    <div id="doctorsList" style="display:none;">
+        <h3>Available Therapist</h3>
+        <button id="selectDoctor">Dr. John Doe</button>
+    </div>
+
+    <p id="status">Waiting for therapist selection...</p>
+    <button id="requestCall" style="display:none;">Request a Call</button>
+    <button id="joinRoom" style="display:none;">Join Call</button>
+
+    <script>
+        let selectedDoctor = "";
+
+        document.getElementById("findDoctor").addEventListener("click", function () {
+            document.getElementById("doctorsList").style.display = "block";
+        });
+
+        document.getElementById("selectDoctor").addEventListener("click", function () {
+            selectedDoctor = "Dr. John Doe";
+            document.getElementById("status").innerText = `You selected ${selectedDoctor}. Waiting for acceptance...`;
+            document.getElementById("requestCall").style.display = "block";
+        });
+
+        document.getElementById("requestCall").addEventListener("click", function () {
+            if (!selectedDoctor) {
+                document.getElementById("status").innerText = "Please select a therapist first.";
+                return;
+            }
+
+            document.getElementById("status").innerText = `Request sent to ${selectedDoctor}. Waiting for acceptance...`;
+            document.getElementById("requestCall").disabled = true;
+
+            localStorage.setItem("therapist_request", "pending");
+
+            let checkAcceptance = setInterval(() => {
+                let response = localStorage.getItem("therapist_request");
+                if (response === "accepted") {
+                    document.getElementById("status").innerText = `${selectedDoctor} has accepted. Join the call now!`;
+                    document.getElementById("joinRoom").style.display = "block";
+                    clearInterval(checkAcceptance);
+                }
+            }, 1000);
+        });
+
+        document.getElementById("joinRoom").addEventListener("click", function () {
+            window.location.href = "https://meet.no42.org/join/598ca321-abbb-496f-9475-8fa43a245822";
+        });
+    </script>
+
+</body>
+</html>

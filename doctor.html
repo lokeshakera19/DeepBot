@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Portal</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        button {
+            width: 90%;
+            max-width: 300px;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        #status {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Therapist Portal</h2>
+    <p id="status">Waiting for patient request...</p>
+    <button id="acceptCall" style="display:none;">Accept Request</button>
+
+    <script>
+        let checkRequests = setInterval(() => {
+            let request = localStorage.getItem("therapist_request");
+
+            if (request === "pending") {
+                document.getElementById("status").innerText = "Patient is requesting a call...";
+                document.getElementById("acceptCall").style.display = "block";
+            }
+        }, 1000);
+
+        document.getElementById("acceptCall").addEventListener("click", function () {
+    localStorage.setItem("therapist_request", "accepted");
+    document.getElementById("status").innerText = "You accepted the call!";
+
+    // Redirect to the desired website after acceptance
+    setTimeout(() => {
+        window.location.href = "https://meet.no42.org/join/598ca321-abbb-496f-9475-8fa43a245822"; // Replace with your actual URL
+    }, 2000); // Delay for 2 seconds before redirecting
+});
+
+    </script>
+
+</body>
+</html>
