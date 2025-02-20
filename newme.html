@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            transition: background-color 0.5s ease-in-out;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+        }
+        h2 {
+            color: #444;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .emoji-display {
+            font-size: 60px;
+            margin: 10px 0;
+        }
+        .emoji-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        .emoji-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .slider {
+            width: 100%;
+            margin: 20px 0;
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            transition: background 0.3s;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #7dcfb6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            background-color: #7dcfb6;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #5fa394;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="moodSection" class="section active">
+            <h2>How are you feeling today? 😊</h2>
+            <div class="emoji-display">😊</div>
+            <p class="emoji-title">Happy</p>
+            <p class="emoji-description">Feeling great and full of energy!</p>
+            <input type="range" min="0" max="4" value="2" class="slider" id="moodSlider">
+
+            <h3>How was your day?</h3>
+            <input type="text" id="dayReview" placeholder="Write something about your day...">
+
+            <button onclick="saveMood()">Set Mood</button>
+            <button onclick="window.location.href='calendar.html'">View Calendar</button>
+        </div>
+    </div>
+
+    <script>
+        const moods = [
+            { title: "Sad", emoji: "😢", description: "Feeling down and low.", color: "#a0c4ff" },
+            { title: "Neutral", emoji: "😐", description: "Just a normal day.", color: "#ffd6a5" },
+            { title: "Happy", emoji: "😊", description: "Feeling great and full of energy!", color: "#fdffb6" },
+            { title: "Excited", emoji: "🤩", description: "Super excited for today!", color: "#caffbf" },
+            { title: "Ecstatic", emoji: "😍", description: "Absolutely thrilled!", color: "#ffc6ff" }
+        ];
+
+        function saveMood() {
+            let moodIndex = document.getElementById("moodSlider").value;
+            let mood = moods[moodIndex];
+            let today = new Date().toISOString().split('T')[0];
+            let review = document.getElementById("dayReview").value;
+
+            let entry = {
+                emoji: mood.emoji,
+                moodTitle: mood.title,
+                color: mood.color,
+                review: review
+            };
+
+            localStorage.setItem(today, JSON.stringify(entry));
+            alert("Mood saved for today!");
+        }
+
+        document.getElementById("moodSlider").addEventListener("input", function () {
+            const mood = moods[this.value];
+            document.querySelector(".emoji-display").innerText = mood.emoji;
+            document.querySelector(".emoji-title").innerText = mood.title;
+            document.querySelector(".emoji-description").innerText = mood.description;
+            document.body.style.backgroundColor = mood.color;
+        });
+    </script>
+</body>
+</html>
