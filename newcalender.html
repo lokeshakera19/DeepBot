@@ -11,37 +11,41 @@
             margin: 0;
             padding: 20px;
             background-color: #f8f9fa;
-            transition: background-color 0.5s ease-in-out;
         }
         h2 {
             color: #444;
+            font-size: 22px;
         }
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            max-width: 500px;
+            gap: 5px;
+            max-width: 90%;
             margin: 0 auto;
         }
         .day {
-            padding: 15px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 5px;
             background: #ddd;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: bold;
+            min-width: 40px;
         }
         .emoji {
-            font-size: 30px;
+            font-size: 20px;
             display: block;
-            margin-bottom: 5px;
         }
         .review {
-            font-size: 12px;
+            font-size: 10px;
             color: #333;
+            word-wrap: break-word;
         }
         button {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px;
+            width: 90%;
+            max-width: 300px;
+            font-size: 16px;
             border: none;
             background: #7dcfb6;
             color: white;
