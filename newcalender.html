@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Calendar</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            transition: background-color 0.5s ease-in-out;
+        }
+        h2 {
+            color: #444;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .day {
+            padding: 15px;
+            border-radius: 10px;
+            background: #ddd;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .emoji {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .review {
+            font-size: 12px;
+            color: #333;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background: #7dcfb6;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Mood Calendar</h2>
+    <div class="calendar" id="calendar"></div>
+    <button onclick="window.location.href='index.html'">Back to Mood Tracker</button>
+
+    <script>
+        function generateCalendar() {
+            let calendarEl = document.getElementById("calendar");
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth();
+            let daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                let dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                let moodData = localStorage.getItem(dateStr);
+
+                let dayEl = document.createElement("div");
+                dayEl.classList.add("day");
+                dayEl.innerText = day;
+
+                if (moodData) {
+                    let mood = JSON.parse(moodData);
+                    dayEl.innerHTML = `<span class="emoji">${mood.emoji}</span>${day}<p class="review">${mood.review || ""}</p>`;
+                    dayEl.style.backgroundColor = mood.color;
+                }
+
+                calendarEl.appendChild(dayEl);
+            }
+        }
+
+        generateCalendar();
+    </script>
+</body>
+</html>
