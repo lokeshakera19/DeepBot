@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relaxation Techniques</title>
     <style>
         body {
@@ -12,85 +12,92 @@
             padding: 20px;
             overflow-x: hidden;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
         h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 2em;
         }
         .exercise {
-            margin: 20px 0;
+            margin: 20px auto;
             padding: 20px;
             border-radius: 15px;
             background: #ffeaa7;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            max-width: 90%;
         }
-        .exercise img, .exercise iframe {
-            max-width: 30%;
+        .exercise img {
+            width: 80%;
+            max-width: 300px;
             border-radius: 15px;
+            margin-top: 10px;
         }
         .exercise-content {
-            max-width: 30%;
-            text-align: left;
+            width: 100%;
+            text-align: center;
         }
         .timer {
             margin-top: 10px;
             font-size: 1.5em;
             color: #333;
         }
+        button {
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #e05a77;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Relaxation Techniques</h1>
-        <div class="exercise">
-            <div class="exercise-content">
-                <h2>Deep Breathing (2 min)</h2>
-                <p>Inhale deeply through your nose, hold for a few seconds, and exhale slowly.</p>
-                <div class="timer" id="timer1">02:00</div>
-                <button onclick="startCountdown(1, 120)">Start</button>
-                <button onclick="pauseCountdown(1)">Pause</button>
-            </div>
-            <img src="https://tse2.mm.bing.net/th?id=OIP.pig5Ml6jVWxzuNU3JcjVvQHaD4&pid=Api&P=0&h=180" alt="Deep Breathing">
-            <iframe width="296" height="156" src="https://www.youtube.com/embed/wfDTp2GogaQ" frameborder="0" allowfullscreen></iframe>
+    <h1>Relaxation Techniques</h1>
+
+    <div class="exercise">
+        <div class="exercise-content">
+            <h2>Deep Breathing (2 min)</h2>
+            <p>Inhale deeply through your nose, hold for a few seconds, and exhale slowly.</p>
+            <div class="timer" id="timer1">02:00</div>
+            <button onclick="startCountdown(1, 120)">Start</button>
+            <button onclick="pauseCountdown(1)">Pause</button>
         </div>
-        <div class="exercise">
-            <div class="exercise-content">
-                <h2>Guided Imagery (3 min)</h2>
-                <p>Visualize a peaceful place, focusing on the sounds, smells, and sensations around you.</p>
-                <div class="timer" id="timer2">03:00</div>
-                <button onclick="startCountdown(2, 180)">Start</button>
-                <button onclick="pauseCountdown(2)">Pause</button>
-            </div>
-            <img src="https://tse2.mm.bing.net/th?id=OIP.1Dh3xfD50NQwvUBWFtCuswHaE8&pid=Api&P=0&h=180" alt="Guided Imagery">
-            <iframe width="296" height="156" src="https://www.youtube.com/embed/TWI639oEzmE" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="exercise">
-            <div class="exercise-content">
-                <h2>Progressive Muscle Relaxation (4 min)</h2>
-                <p>Tense each muscle group for 5 seconds, then relax for 30 seconds.</p>
-                <div class="timer" id="timer3">04:00</div>
-                <button onclick="startCountdown(3, 240)">Start</button>
-                <button onclick="pauseCountdown(3)">Pause</button>
-            </div>
-            <img src="https://www.anahana.com/hubfs/progressive-muscle-relaxation-first-website.jpg" alt="Progressive Muscle Relaxation">
-            <iframe width="296" height="156" src="https://www.youtube.com/embed/Q_diV-uqV9w" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <img src="https://tse2.mm.bing.net/th?id=OIP.pig5Ml6jVWxzuNU3JcjVvQHaD4&pid=Api&P=0&h=180" alt="Deep Breathing">
     </div>
+
+    <div class="exercise">
+        <div class="exercise-content">
+            <h2>Guided Imagery (3 min)</h2>
+            <p>Visualize a peaceful place, focusing on the sounds, smells, and sensations around you.</p>
+            <div class="timer" id="timer2">03:00</div>
+            <button onclick="startCountdown(2, 180)">Start</button>
+            <button onclick="pauseCountdown(2)">Pause</button>
+        </div>
+        <img src="https://tse2.mm.bing.net/th?id=OIP.1Dh3xfD50NQwvUBWFtCuswHaE8&pid=Api&P=0&h=180" alt="Guided Imagery">
+    </div>
+
+    <div class="exercise">
+        <div class="exercise-content">
+            <h2>Progressive Muscle Relaxation (4 min)</h2>
+            <p>Tense each muscle group for 5 seconds, then relax for 30 seconds.</p>
+            <div class="timer" id="timer3">04:00</div>
+            <button onclick="startCountdown(3, 240)">Start</button>
+            <button onclick="pauseCountdown(3)">Pause</button>
+        </div>
+        <img src="https://www.anahana.com/hubfs/progressive-muscle-relaxation-first-website.jpg" alt="Progressive Muscle Relaxation">
+    </div>
+
     <script>
         let timers = {};
         let intervals = {};
+
         function startCountdown(id, seconds) {
             clearInterval(intervals[id]);
             let timerElement = document.getElementById('timer' + id);
@@ -106,6 +113,7 @@
                 timerElement.textContent = `${mins}:${secs}`;
             }, 1000);
         }
+
         function pauseCountdown(id) {
             clearInterval(intervals[id]);
         }
