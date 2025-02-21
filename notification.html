@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .notification-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .notification {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+        .notification.mood { border-left: 5px solid #ff6b6b; }
+        .notification.chat { border-left: 5px solid #0077b6; }
+        .notification.game { border-left: 5px solid #34c759; }
+        .notification p {
+            margin: 0;
+            flex: 1;
+            color: #333;
+        }
+        .notification a {
+            color: #0077b6;
+            font-weight: bold;
+            text-decoration: none;
+            padding-left: 10px;
+        }
+        .hidden { display: none; }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #0077b6;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Notifications</h2>
+    <div class="notification-container">
+        <div id="moodNotification" class="notification mood hidden"></div>
+        <div id="chatbotNotification" class="notification chat hidden"></div>
+        <div id="gameNotification" class="notification game hidden"></div>
+    </div>
+
+    <button onclick="resetNotifications()">Reset Notifications</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let today = new Date().toISOString().split('T')[0];
+            let lastMoodTracked = localStorage.getItem("moodTrackedDate");
+            let chatVisited = localStorage.getItem("chatVisited");
+            let gamePlayed = localStorage.getItem("gamePlayed");
+
+            let moodNotificationDiv = document.getElementById("moodNotification");
+            let chatbotNotificationDiv = document.getElementById("chatbotNotification");
+            let gameNotificationDiv = document.getElementById("gameNotification");
+
+            // Mood Tracking Notification
+            if (lastMoodTracked !== today) {
+                moodNotificationDiv.innerHTML = `
+                    <p>You haven't tracked your mood today.</p> 
+                    <a href='deepcheck.html' onclick='markAsDone("moodTrackedDate")'>Track Now</a>`;
+                moodNotificationDiv.classList.remove("hidden");
+            }
+
+            // Chatbot Daily Reminder
+            if (!chatVisited || chatVisited !== today) {
+                chatbotNotificationDiv.innerHTML = `
+                    <p>💙 Talk it out daily! Chat with our AI therapist.</p> 
+                    <a href='neurocalm.html' onclick='markAsDone("chatVisited")'>Start Now</a>`;
+                chatbotNotificationDiv.classList.remove("hidden");
+            }
+
+            // Game Suggestion
+            if (!gamePlayed || gamePlayed !== today) {
+                gameNotificationDiv.innerHTML = `
+                    <p>🎮 Feeling stressed? Play some fun games!</p> 
+                    <a href='index.html' onclick='markAsDone("gamePlayed")'>Play Now</a>`;
+                gameNotificationDiv.classList.remove("hidden");
+            }
+        });
+
+        function markAsDone(key) {
+            let today = new Date().toISOString().split('T')[0];
+            localStorage.setItem(key, today);
+        }
+
+        function resetNotifications() {
+            localStorage.clear();
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>
