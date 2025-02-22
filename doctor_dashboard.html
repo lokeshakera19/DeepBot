@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Patient Requests</h2>
+        <ul id="requestsList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadRequests();
+        });
+
+        function loadRequests() {
+            let requests = JSON.parse(localStorage.getItem("patientRequests")) || [];
+            let requestsList = document.getElementById("requestsList");
+            requestsList.innerHTML = "";
+
+            if (requests.length === 0) {
+                requestsList.innerHTML = "<p>No patient requests yet.</p>";
+            } else {
+                requests.forEach((request, index) => {
+                    let li = document.createElement("li");
+                    li.innerHTML = `
+                        ${request.name} - ${request.issue} 
+                        <button onclick="acceptRequest(${index})">Accept</button>
+                    `;
+                    requestsList.appendChild(li);
+                });
+            }
+        }
+
+        function acceptRequest(index) {
+            let requests = JSON.parse(localStorage.getItem("patientRequests")) || [];
+            requests.splice(index, 1);  // Remove accepted request
+            localStorage.setItem("patientRequests", JSON.stringify(requests));
+            alert("Session accepted! Redirecting...");
+            window.location.href = "https://example.com/session"; // Change this to actual session link
+            loadRequests(); // Refresh list after accepting
+        }
+    </script>
+
+</body>
+</html>

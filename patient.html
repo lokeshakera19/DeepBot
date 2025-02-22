@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>What mental health issue are you experiencing?</h2>
+        <input type="text" id="patientName" placeholder="Enter your name" required>
+        <input type="text" id="issueInput" placeholder="Enter your issue (e.g., Anxiety, Depression)" required>
+        <button onclick="findDoctors()">Find Doctors</button>
+        <ul id="doctorList"></ul>
+    </div>
+
+    <script>
+        function findDoctors() {
+            let name = document.getElementById("patientName").value;
+            let issue = document.getElementById("issueInput").value.toLowerCase();
+            if (!name || !issue) {
+                alert("Please enter both your name and issue.");
+                return;
+            }
+
+            let doctor = JSON.parse(localStorage.getItem("doctor"));
+            let doctorList = document.getElementById("doctorList");
+            doctorList.innerHTML = "";
+
+            if (doctor && doctor.specialization.toLowerCase() === issue) {
+                let li = document.createElement("li");
+                li.innerHTML = `
+                    Dr. ${doctor.name} - ${doctor.specialization}
+                    <button onclick="joinRoom()">Join Room</button>
+                `;
+                doctorList.appendChild(li);
+            } else {
+                doctorList.innerHTML = "<p>No doctors available for this issue.</p>";
+            }
+        }
+
+        function joinRoom() {
+            window.location.href = "https://meet.no42.org/join/598ca321-abbb-496f-9475-8fa43a245822"; // Replace with actual session link
+        }
+    </script>
+
+</body>
+</html>
