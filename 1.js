@@ -51,7 +51,7 @@ function sendMessage() {
     if (dangerousWords.some(word => userText.toLowerCase().includes(word))) {
         botTyping.remove();
         displayBotMessage(`Hey, I hear you. You're not alone. Please talk to someone who can help. You're important and loved. 💙  
-        Visit [www.ok.com](https://www.ok.com) for support. You're never alone in this. 💕`);
+        Visit [https://deep-bot-ochre.vercel.app/patient.html](https://deep-bot-ochre.vercel.app/patient.html) for support. You're never alone in this. 💕`);
         return;
     }
 
