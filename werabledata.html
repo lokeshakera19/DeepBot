@@ -16,7 +16,6 @@
             margin: 0;
         }
 
-        /* Mobile App Look */
         .container {
             background: white;
             width: 90%;
@@ -28,14 +27,12 @@
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Headings */
         h2 {
             color: #6A0DAD;
             font-size: 24px;
             margin-bottom: 10px;
         }
 
-        /* Form Styles */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -54,7 +51,6 @@
             font-size: 16px;
         }
 
-        /* Button Styling */
         button {
             width: 100%;
             background: #6A0DAD;
@@ -71,7 +67,6 @@
             transform: scale(1.05);
         }
 
-        /* Result Box */
         .result-box {
             margin-top: 15px;
             padding: 10px;
@@ -80,9 +75,19 @@
             display: none;
             background: rgba(106, 13, 173, 0.1);
             animation: slideIn 0.5s ease-in-out;
+            text-align: left;
         }
 
-        /* Animations */
+        .article-link {
+            color: #6A0DAD;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .article-link:hover {
+            text-decoration: underline;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -134,29 +139,31 @@
 
             // Sleep Analysis
             if (sleep < 6) {
-                recommendations.push("⚠️ You need more sleep! Aim for at least 7-8 hours.");
+                recommendations.push("⚠️ <b>Sleep Alert:</b> You need more sleep! Aim for at least 7-8 hours.");
+                recommendations.push(`📖 <a class="article-link" href="https://www.sleepfoundation.org/articles/why-do-we-need-sleep" target="_blank">Click here</a> to learn why sleep is important.`);
             } else {
-                recommendations.push("✅ Your sleep duration is good!");
+                recommendations.push("✅ <b>Great!</b> Your sleep duration is good.");
             }
 
             // Heart Rate Analysis
             if (heartRate < 60) {
-                recommendations.push("⚠️ Your heart rate is low. Consult a doctor if you feel weak.");
+                recommendations.push("⚠️ <b>Low Heart Rate:</b> Your heart rate is low. If you feel weak or dizzy, consult a doctor.");
             } else if (heartRate > 100) {
-                recommendations.push("⚠️ Your heart rate is high. Consider relaxation techniques.");
+                recommendations.push("⚠️ <b>High Heart Rate:</b> Your heart rate is elevated. Try relaxation techniques.");
             } else {
-                recommendations.push("✅ Your heart rate is in a healthy range.");
+                recommendations.push("✅ <b>Healthy Heart Rate:</b> Your heart rate is in a good range.");
             }
 
             // Stress Analysis
             if (stress === "high") {
-                recommendations.push("⚠️ Reduce stress! Try meditation, exercise, or deep breathing.");
+                recommendations.push("⚠️ <b>High Stress Levels:</b> Try meditation, exercise, or deep breathing.");
+                recommendations.push(`🧘 <a class="article-link" href="https://www.mayoclinic.org/healthy-lifestyle/stress-management/basics/stress-basics/hlv-20049495" target="_blank">Click here</a> to learn how to manage stress.`);
             } else {
-                recommendations.push("✅ Your stress level is manageable. Keep it up!");
+                recommendations.push("✅ <b>Good Stress Management:</b> Your stress level is manageable.");
             }
 
             // Display Results
-            resultBox.innerHTML = recommendations.join("<br>");
+            resultBox.innerHTML = recommendations.join("<br><br>");
             resultBox.style.display = "block";
         }
     </script>
