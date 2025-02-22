@@ -1,114 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Health Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            text-align: center;
-            transition: background 0.5s ease-in-out;
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .question {
-            margin-top: 15px;
-            font-size: 16px;
-        }
-        .emoji-container {
-            margin: 10px 0;
-        }
-        .emoji {
-            font-size: 24px;
-            padding: 8px;
-            cursor: pointer;
-        }
-        .button {
-            background: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker</title>
+    <link rel="stylesheet" href="deepcheck.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>Daily Mental Health Check-In</h2>
+<h2>Hey there! Let's check in on your day 😊</h2>
 
-    <div class="question">How are you feeling today?</div>
-    <div class="emoji-container">
-        <span class="emoji" onclick="selectMood('😊', '#f3f39d')">😊</span>
-        <span class="emoji" onclick="selectMood('😐', '#c1c1c1')">😐</span>
-        <span class="emoji" onclick="selectMood('😢', '#8fc7f1')">😢</span>
-        <span class="emoji" onclick="selectMood('😠', '#ff6961')">😠</span>
-        <span class="emoji" onclick="selectMood('😰', '#7760e3')">😰</span>
-    </div>
-
-    <div class="question">Did you experience anxiety today?</div>
-    <button class="button" onclick="logResponse('anxiety', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('anxiety', 'No')">No</button>
-
-    <div class="question">Did you have a panic attack?</div>
-    <button class="button" onclick="logResponse('panic', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('panic', 'No')">No</button>
-
-    <div class="question">Did you feel overwhelmed or stressed?</div>
-    <button class="button" onclick="logResponse('stress', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('stress', 'No')">No</button>
-
-    <div class="question">Did you get enough sleep last night?</div>
-    <button class="button" onclick="logResponse('sleep', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('sleep', 'No')">No</button>
-
-    <div class="question">Did you talk to a friend or family member today?</div>
-    <button class="button" onclick="logResponse('social', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('social', 'No')">No</button>
-
-    <div class="question">Did you engage in any physical activity?</div>
-    <button class="button" onclick="logResponse('exercise', 'Yes')">Yes</button>
-    <button class="button" onclick="logResponse('exercise', 'No')">No</button>
-    <div class="question1"></div>
-    <button class="button" onclick="window.location.href='calendar.html'">Show Monthly Report</button>
+<div class="question">How’s your vibe today?</div>
+<div>
+    <span class="emoji" onclick="selectMood(this, '😊', '#f3f39d')">😊</span>
+    <span class="emoji" onclick="selectMood(this, '😐', '#c1c1c1')">😐</span>
+    <span class="emoji" onclick="selectMood(this, '😢', '#8fc7f1')">😢</span>
+    <span class="emoji" onclick="selectMood(this, '😠', '#ff6961')">😠</span>
+    <span class="emoji" onclick="selectMood(this, '😰', '#7760e3')">😰</span>
 </div>
 
+<div class="question">Did stress knock on your door?</div>
+<div>
+    <span class="emoji" onclick="logResponse('stress', 'Yes')">✅</span>
+    <span class="emoji" onclick="logResponse('stress', 'No')">❌</span>
+</div>
+
+<div class="question">Any anxious moments today?</div>
+<div>
+    <span class="emoji" onclick="logResponse('anxiety', 'Yes')">✅</span>
+    <span class="emoji" onclick="logResponse('anxiety', 'No')">❌</span>
+</div>
+
+<div class="question">Did you sleep like a baby?</div>
+<div>
+    <span class="emoji" onclick="logResponse('sleep', 'Yes')">😴</span>
+    <span class="emoji" onclick="logResponse('sleep', 'No')">🌙</span>
+</div>
+
+<div class="question">Did you get moving today?</div>
+<div>
+    <span class="emoji" onclick="logResponse('exercise', 'Yes')">🏃‍♂️</span>
+    <span class="emoji" onclick="logResponse('exercise', 'No')">🛋️</span>
+</div>
+
+<div class="question">Did you connect with someone?</div>
+<div>
+    <span class="emoji" onclick="logResponse('social', 'Yes')">💬</span>
+    <span class="emoji" onclick="logResponse('social', 'No')">🤐</span>
+</div>
+
+<div class="question">How was your day in one sentence?</div>
+<input type="text" id="user-note" placeholder="How was your day?">
+<button class="button" onclick="saveNote()">Submit</button>
+
 <script>
-    function selectMood(emoji, color) {
-        document.body.style.background = color;
-        localStorage.setItem('themeColor', color);
-        localStorage.setItem('moodEmoji', emoji);
-    }
+    function selectMood(element, emoji, color) {
+        document.body.style.background = color;
+        localStorage.setItem('themeColor', color);
+        localStorage.setItem('moodEmoji', emoji);
+        document.querySelectorAll('.emoji').forEach(e => e.classList.remove('selected'));
+        element.classList.add('selected');
+    }
 
-    function logResponse(type, value) {
-        let today = new Date().getDate();
-        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
-        if (!logs[today]) {
-            logs[today] = {};
-        }
-        logs[today][type] = value;
-        logs[today].emoji = localStorage.getItem('moodEmoji') || '😐';
-        localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
-    }
+    function logResponse(type, value) {
+        let today = new Date().getDate();
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+        if (!logs[today]) {
+            logs[today] = {};
+        }
+        logs[today][type] = value;
+        logs[today].emoji = localStorage.getItem('moodEmoji') || '😐';
+        localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
+    }
 
-    document.body.style.background = localStorage.getItem('themeColor') || '#f4f4f9';
+    function submitResponses() {
+        let today = new Date().getDate();
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+        logs[today].summary = document.getElementById('daySummary').value;
+        localStorage.setItem('mentalHealthLogs', JSON.stringify(logs));
+        window.location.href = 'responses.html';
+    }
+
+    document.body.style.background = localStorage.getItem('themeColor') || '#f4f4f9';
 </script>
 
 </body>
