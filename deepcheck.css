@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    transition: background 0.5s ease-in-out;
+}
+
+.emoji {
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.emoji:hover, .selected {
+    transform: scale(1.3);
+}
+
+.question {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.response-box {
+    margin-top: 20px;
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.button:hover {
+    background: #0056b3;
+}
