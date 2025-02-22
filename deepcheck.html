@@ -50,8 +50,9 @@
 </div>
 
 <div class="question">How was your day in one sentence?</div>
-<input type="text" id="user-note" placeholder="How was your day?">
-<button class="button" onclick="saveNote()">Submit</button>
+<input type="text" class="response-box" id="daySummary" placeholder="Type here...">
+
+<button class="button" onclick="submitResponses()">Submit & View</button>
 
 <script>
     function selectMood(element, emoji, color) {
