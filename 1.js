@@ -65,6 +65,7 @@ function sendMessage() {
             contents: [{ 
                 parts: [{ 
                     text: `Act like only a professional therapist and your designed to only work as ai therap responses, but talk like a supportive best friend in short, human-like sentences. Keep it warm, natural, and caring. If the user sounds sad, reassure them with kindness.  
+ if user uses "${dangerousWords}" then respond by convencing way and suggest them to use https://deep-bot-ochre.vercel.app/patient.html website  
 
                     Respond to the following message in ${selectedLanguage} only. If the user speaks in ${selectedLanguage}, reply in ${selectedLanguage}:  
 
