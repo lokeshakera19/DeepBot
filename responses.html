@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Mood Calendar</title>
+    <link rel="stylesheet" href="responses.css">
+</head>
+<body>
+
+<h2>Your Monthly Mood Tracker 📅</h2>
+
+<div id="calendar"></div>
+
+<button class="button" onclick="window.location.href='deepcheck.html'">Back to Mood Tracker</button>
+
+<script>
+    function generateCalendar() {
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth();
+        let firstDay = new Date(year, month, 1).getDay();
+        let totalDays = new Date(year, month + 1, 0).getDate();
+        let calendar = document.getElementById('calendar');
+        let logs = JSON.parse(localStorage.getItem('mentalHealthLogs')) || {};
+
+        let calendarHTML = '<div class="calendar-grid">';
+
+        for (let i = 0; i < firstDay; i++) {
+            calendarHTML += '<div class="empty"></div>';
+        }
+
+        for (let day = 1; day <= totalDays; day++) {
+            let emoji = logs[day]?.emoji || '❓';
+            calendarHTML += `<div class="calendar-day">${day}<br>${emoji}</div>`;
+        }
+
+        calendarHTML += '</div>';
+        calendar.innerHTML = calendarHTML;
+    }
+
+    generateCalendar();
+</script>
+
+</body>
+</html>
