@@ -24,6 +24,9 @@ userInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") sendMessage();
 });
 
+// ✅ Dangerous Words List
+const dangerousWords = ["suicide", "end life", "kill myself", "can't go on", "hurt myself", "die", "no hope"];
+
 // ✅ Send Message Function
 function sendMessage() {
     const userText = userInput.value.trim();
@@ -44,6 +47,14 @@ function sendMessage() {
     chatBox.appendChild(botTyping);
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    // 🚨 Check for dangerous words
+    if (dangerousWords.some(word => userText.toLowerCase().includes(word))) {
+        botTyping.remove();
+        displayBotMessage(`Hey, I hear you. You're not alone. Please talk to someone who can help. You're important and loved. 💙  
+        Visit [www.ok.com](https://www.ok.com) for support. You're never alone in this. 💕`);
+        return;
+    }
+
     // 🔥 Fetch AI Response
     fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`, {
         method: "POST",
@@ -53,7 +64,13 @@ function sendMessage() {
         body: JSON.stringify({
             contents: [{ 
                 parts: [{ 
-                    text: `Respond in ${selectedLanguage} only. User: "${userText}"` 
+                    text: `Act like only a professional therapist and your designed to only work as ai therap responses, but talk like a supportive best friend in short, human-like sentences. Keep it warm, natural, and caring. If the user sounds sad, reassure them with kindness.  
+
+                    Respond to the following message in ${selectedLanguage} only. If the user speaks in ${selectedLanguage}, reply in ${selectedLanguage}:  
+
+                    User: "${userText}"  
+
+                    Reply:` 
                 }] 
             }]
         })
